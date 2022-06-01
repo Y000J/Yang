@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分解url</title>
+</head>
+
+<body>
+    <script>
+        //分解url  使用split（）
+        // url=www.baidu.com.index.heml?a=1&b=2&c=3
+        let url = 'www.baidu.com.index.heml?a=1&b=2&c=3'
+        // 拆1
+        let urlArr1 = url.split('?');
+        console.log(urlArr1);
+        // 拆2
+        let urlArr2 = urlArr1[1].split('&');
+        console.log(urlArr2);
+        // 拆3
+        let urlArr3;
+        let obj = {};
+        urlArr2.forEach(function (key, index) {
+            console.log(key, index);
+            urlArr3 = key.split('=');
+            console.log(urlArr3);
+            obj[urlArr3[0]] = `${urlArr3[1]}`
+            console.log(obj);
+        });
+
+
+    </script>
+</body>
+
+</html>

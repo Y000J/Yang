@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./DataHelper.js"></script>
+    <script src="14.js"></script>
+
+    <style>
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            padding: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #list {
+            width: 400px;
+        }
+
+        td {
+            width: 150px;
+            border: 1px solid #000;
+        }
+
+        th {
+            width: 150px;
+            border: 1px solid #000;
+            background-color: aqua;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <table id="add">
+            <tr>
+                <td>请输入用户名：</td>
+                <td><input type="text" id="uName"></td>
+            </tr>
+            <tr>
+                <td>请输入邮箱：</td>
+                <td><input type="text" id="email"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="添加" id="addBtn">
+                </td>
+            </tr>
+        </table>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>邮箱</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+
+        </table>
+    </div>
+
+
+</body>
+
+</html>

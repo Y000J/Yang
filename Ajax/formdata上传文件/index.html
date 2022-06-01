@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="./lib/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="file1">
+    <button id="btnUpload">上传</button>
+    <br>
+    <div class="progress" style="width:300px">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0%" id="ad">
+            0%
+        </div>
+    </div>
+    <br>
+    <img src="" alt="" id="img" width="800">
+
+    <script>
+        let btnUpload = document.querySelector('#btnUpload');
+        btnUpload.addEventListener('click', function () {
+            // 判断是否选择了文件  files选择上传的文件数组
+            let file = document.querySelector('#file1').files;
+            if (file.length === 0) {
+                return alert('还未选择文件！');
+            };
+            let fd = new FormData();
+            fd.append('avatar', file[0]);
+            let xhr = new XMLHttpRequest();
+            // 显示文件上传进度
+            xhr.upload.onprogress = function (e) {
+                // 判断当前文件是否可计算长度
+                if (e.lengthComputable) {
+                    // e.loaded 已传输的字节   e.total  需传输的总字节
+                    let percentComelete = Math.ceil(e.loaded / e.total * 100);
+                    // document.querySelector('.progress-bar').style.width = percentComelete + '%'
+                    $('#ad').attr('style', 'width:' + percentComelete + '%').html(percentComelete + '%')
+                }
+            }
+            // 上传完成之后进度条的样式
+            xhr.upload.onload=function(){
+                $('#ad').removeClass().addClass('progress-bar progress-bar-success')
+            }
+            xhr.open('POST', 'http://liulongbin.top:3006/api/upload/avatar');
+            xhr.send(fd);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let result = JSON.parse(xhr.responseText);
+                    if (result.status === 200) {
+                        document.querySelector('#img').src = 'http://liulongbin.top:3006' + result.url;
+                    } else {
+                        console.log(result.message);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

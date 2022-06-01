@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            position: relative;
+            margin: 50px auto;
+            width: 1000px;
+            height: 800px;
+        }
+
+        .QR-code {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+
+        .QR-code #min-QR {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bigQR {
+            display: none;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            right: 50px;
+            top: 50px;
+        }
+
+        .bigQR #max-QR {
+            width: 100%;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="QR-code">
+        <img src="images/1.png" alt="二维码" id="min-QR">
+        <div class="bigQR">
+            <img src="images/erweima.png" alt="" id="max-QR">
+        </div>
+    </div>
+</div>
+
+<script>
+    let mQRCode = document.querySelector('.QR-code');
+    let bigQR = document.querySelector('.bigQR');
+    mQRCode.addEventListener('mouseenter', function () {
+        bigQR.style.display='block'
+    });
+    mQRCode.addEventListener('mouseleave', function () {
+        bigQR.style.display='none'
+    })
+</script>
+
+<body>
+
+</body>
+
+</html>

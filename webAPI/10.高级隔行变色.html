@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            display: block;
+            width: 800px;
+            margin: 100px auto;
+            border-collapse: collapse;
+        }
+
+        tr {
+            width: 200px;
+            height: 30px;
+        }
+
+        td {
+            width: 200px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        .blueLi {
+            background-color: blue;
+        }
+
+        .blue {
+            background-color: skyblue;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+
+
+<body>
+    <table>
+        <tr>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+        </tr>
+    </table>
+
+    <script>
+        let tr = document.querySelectorAll('tr');
+        for (let i = 0; i < tr.length; i++) {
+            if (i % 2 == 0) {
+                tr[i].className = 'blueLi';
+            } else {
+                tr[i].className = 'blue';
+            };
+
+            // 鼠标移入移除事件
+            tr[i].addEventListener('mouseover', function () {
+                let re = this.className;
+                // 添加自定义属性
+                this.setAttribute('redLi', re);
+                this.className = 'red';
+            });
+            tr[i].addEventListener('mouseout', function () {
+                this.className =this.getAttribute('redLi')
+            })
+        }
+
+
+
+    </script>
+</body>
+
+</html>

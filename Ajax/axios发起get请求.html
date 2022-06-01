@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="axios.js"></script>
+</head>
+
+<body>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <script>
+        document.querySelector('#get').addEventListener('click', function () {
+            // axios.get('http://www.liulongbin.top:3006/api/get', { params: { name: 'zsz', age: 50 } }).then(function (res) {
+            //     console.log(res.data);
+            // })
+
+            axios({
+                method: 'GET',
+                url: 'http://www.liulongbin.top:3006/api/get',
+                params: {
+                    name: 'ysj',
+                    age: 20
+                }
+            }).then(function (res) {
+                console.log(res.data);
+            })
+        })
+        document.querySelector('#post').addEventListener('click', function () {
+            // axios.post('http://www.liulongbin.top:3006/api/post', { name: 'zsz', age: 50 }).then(function (res) {
+            //     console.log(res);
+            // })
+
+            axios({
+                method: 'POST',
+                url: 'http://www.liulongbin.top:3006/api/post',
+                data: {
+                    name: 'yj',
+                    age: 20
+                }
+            }).then(function (res) {
+                console.log(res.data);
+            })
+        })
+    </script>
+</body>
+
+</html>

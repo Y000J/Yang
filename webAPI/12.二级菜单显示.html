@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav.containar {
+            width: 1000px;
+            margin: 100px auto;
+        }
+
+        .nav li {
+            list-style: none;
+            float: left;
+            width: 80px;
+            height: 41px;
+            text-align: center;
+            margin-right: 5px;
+            position: relative;
+        }
+
+        .nav li a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            height: 41px;
+            width: 80px;
+            border-bottom: 1px solid orange;
+            line-height: 41px;
+        }
+
+        .nav li a:hover {
+            background-color: #eee;
+        }
+
+        .nav li ul {
+            width: 100%;
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            display: none;
+        }
+
+        .nav li ul li:hover {
+            border-bottom: 1px solid #FECC48;
+        }
+
+        .nav li ul li a {
+            text-align: center;
+            height: 100%;
+        }
+
+        .nav li ul li a:hover {
+            background-color: #FFF5DA;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="nav containar">
+        <li>
+            <a href="#">微博</a>
+            <!-- 下拉菜单 -->
+            <ul>
+                <li>
+                    <a href="#">选项</a>
+                </li>
+                <li>
+                    <a href="#">选项</a>
+                </li>
+                <li>
+                    <a href="#">选项</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">头条</a>
+            <!-- 下拉菜单 -->
+            <ul>
+                <li>
+                    <a href="#">选项2</a>
+                </li>
+                <li>
+                    <a href="#">选项2</a>
+                </li>
+                <li>
+                    <a href="#">选项2</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">新闻</a>
+            <!-- 下拉菜单 -->
+            <ul>
+                <li>
+                    <a href="#">选项3</a>
+                </li>
+                <li>
+                    <a href="#">选项3</a>
+                </li>
+                <li>
+                    <a href="#">选项3</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        // 获取元素
+        let nav = document.querySelector('.nav');
+        // 得到里面的4个li
+        let lis = nav.children;
+        // 给li添加循环注册事件
+        for (let i = 0; i < lis.length; i++) {
+            lis[i].addEventListener('mouseover', function () {
+                this.children[1].style.display='block';
+            })
+            lis[i].addEventListener('mouseout', function () {
+                this.children[1].style.display='none';
+
+            })
+        }
+    </script>
+</body>
+
+</html>

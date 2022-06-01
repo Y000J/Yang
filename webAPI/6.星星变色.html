@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 650px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+    </div>
+
+    <script>
+        let imgs = document.querySelectorAll('img');
+        let container = document.querySelector('.container');
+
+        for (let i = 0; i < imgs.length; i++) {
+
+            imgs[i].addEventListener('mouseenter', function () {
+                if (i < 3) {
+                    this.src = 'images/left.jpg';
+                } else {
+                    this.src = 'images/right.jpg'
+                }
+            });
+
+            imgs[i].addEventListener('mouseleave', function () {
+                // this.src获取的是图片的物理定义  无法和相对路径进行判断
+                // 解决使用indexOf 判断图片名字是否在this.src中  有返回下标  无返回-1
+                if (this.src.indexOf('pressed.jpg') == -1) {
+                    this.src = 'images/normal.jpg';
+                } 
+            });
+
+            // 点击事件
+            imgs[i].addEventListener('click', function () {
+                for(let j=0;j<imgs.length;j++){
+                    imgs[j].src='images/normal.jpg';
+                }
+                this.src = 'images/pressed.jpg';
+            })
+        };
+
+    </script>
+</body>
+
+</html>

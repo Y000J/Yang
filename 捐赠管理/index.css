@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 1000px;
+    margin: 100px auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container .head {
+    height: 40px;
+    padding: 0 5px;
+    border: 1px solid rgb(124, 173, 236);
+    font-size: 18px;
+    display: flex;
+    line-height: 40px;
+    align-items: center;
+}
+
+#selSearchOrg {
+    margin-right: 10px;
+}
+
+.selO {
+    width: 100px;
+    height: 22px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.container .head input {
+    height: 22px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.screen {
+    height: 40px;
+    border: 1px solid rgb(124, 173, 236);
+    border-top: none;
+    line-height: 40px;
+    padding: 0 5px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+}
+
+.screen .wi {
+    border: 1px solid #767676;
+    border-radius: 5px;
+    width: 150px;
+    height: 22px;
+    margin-right: 10px;
+}
+
+#btnAdd,
+#btndel {
+    height: 22px;
+    border: 1px solid #767676;
+    border-radius: 5px;
+    width: 40px;
+    margin-right: 2px;
+}
+
+#tbData {
+    width: 1000px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#tbData th,
+td {
+    border: 1px solid #000;
+    height: 35px;
+}
+
+#tbData th {
+    background-color: skyblue;
+}
+
+#tbData .qs {
+    width: 90px;
+}
+
+#tbData .qd {
+    width: 120px;
+}
+
+#tbData .qf {
+    width: 141px;
+}
+
+#tbody input {
+    height: 22px;
+    width: 90%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #767676;
+    border-style: solid;
+
+}
+
+input:focus {
+    padding-left: 2px;
+    outline: 1px solid #fff;
+    border: 1px solid #767676;
+}

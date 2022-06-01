@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 和机器人剪刀石头布
+        // 剪刀3  石头2  布1
+        // 思路：
+        /*    接收用户输入的数 
+              随机生成1-3之间的一个数  作为机器人的数
+              两个数字相减  判断胜负
+
+        比较规则  
+                机器        人      结果        
+                3           2       1       赢
+                2           1       1       赢
+                1           3       -2      赢
+                x           y       0       平
+                其他情况                     输
+        */
+        // 1、接收用户输入的数字
+        let userNum = +prompt('请输入： 剪刀3  石头2  布1');
+        // 2、生成机器人的随机数
+        let robotNum = randNum(1, 3);
+        function randNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        };
+        console.log(robotNum);
+        // 进行相减比较
+        if(robotNum-userNum==1||robotNum-userNum==-2){
+            alert('你赢了');
+        }else if(robotNum-userNum==0){
+            alert('平局');
+        }else{
+            alert('你输了');
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        let arr = [1, 2, [5, 6, [7, 8]]];
+        function flat(arr) {
+            // 准备一个空数组
+            let result = [];
+            // 遍历数组  判断每个元素是否为数组
+            for (let i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    // 调用函数，返回递归后的值  将其与数组拼接
+                    result = result.concat(flat(arr[i]));
+                } else {
+                    // 不是数组将其加入到数组中
+                    result.push(arr[i])
+                }
+            }
+            return result;
+        }
+
+        let a = flat(arr);
+        console.log(a);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成表格头</title>
+    <style>
+        #tbData {
+            width: 800px;
+            height: 20px;
+            margin: 50px auto;
+            border-collapse: collapse;
+
+        }
+
+        #tbData th {
+            border: 1px solid #000;
+            background-color: skyblue;
+            color: #fff;
+        }
+
+        #tbData td {
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table> -->
+
+</body>
+<script>
+    // 准备表格数据
+    let tbData = {
+
+        // 表格头部数据
+        headData: ['序号', '捐款人', '单位', '金额', '日期'],
+        // 表格行数据
+        bodyData: [{
+            id: 1,
+            tName: '李连杰',
+            tOrg: '壹基金',
+            money: '10000000',
+            tdate: '2019-11-21'
+        },
+        {
+            id: 2,
+            tName: '成龙',
+            tOrg: '北京基金',
+            money: '100000000',
+            tdate: '2019-11-21'
+        },
+        {
+            id: 3,
+            tName: '甑子丹',
+            tOrg: '哈哈哈基金',
+            money: '10000000',
+            tdate: '2018-11-21'
+        },
+        {
+            id: 4,
+            tName: '哦豁',
+            tOrg: '阿尔法',
+            money: '10000000',
+            tdate: '2011-11-21'
+        },
+        {
+            id: 5,
+            tName: '哦豁',
+            tOrg: '阿尔法',
+            money: '10000000',
+            tdate: '2022-11-21'
+        }
+        ]
+    }
+
+    //1.将标签字符串  输出到页面body中  document.write
+    // 2.表格标签字符串  使用一个变量  保存起来
+    // 3.遍历数据对象 的第一个属性  表头数组  head
+
+
+    // 声明一个存放头部标签的变量
+    let strHTML = `<table id="tbData"><tr>`;
+    for (let i = 0; i < tbData.headData.length; i++) {
+        strHTML += `<th>${tbData.headData[i]}</th>`;
+    }
+    strHTML += `</tr></table>`;
+    document.write(strHTML);
+    // 数据
+    let str1HTML = '';
+    let tr = document.querySelector('#tbData');
+    let bData = tbData.bodyData;
+    // console.log(bData,str1HTML);
+    for (let i = 0; i < bData.length; i++) {
+        // str1HTML += `<tr><td>${bData[i].id}</td><td>${bData[i].tName}</td><td>${bData[i].tOrg}</td><td>${bData[i].money}</td><td>${bData[i].tdate}</td></tr>`
+        str1HTML += `<tr>`;
+        for (keys in bData[i]) {
+            str1HTML += `<td>${bData[i][keys]}</td>`
+        }
+        str1HTML += `</tr>`;
+    }
+    tr.insertAdjacentHTML('beforeend', str1HTML);
+</script>
+
+</html>

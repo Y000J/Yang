@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匀速动画</title>
+    <style>
+        * {
+            margin: 0;
+            /* padding: 0; */
+        }
+
+        .box {
+            width: 50px;
+            position: relative;
+            height: 50px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">按钮400</button>
+    <button id="btn2">按钮800</button>
+    <div class="box"></div>
+</body>
+<script>
+    let box = document.querySelector('.box');
+    let btn1 = document.querySelector('#btn1');
+    let btn2 = document.querySelector('#btn2');
+    // 匀速动画函数
+    function animation(obj, target, test, callback) {
+        // 每次运行要清除以前的定时器
+        clearInterval(obj.timers);
+        obj.timers = setInterval(function () {
+            let te = obj.offsetLeft - target;
+            let test1 = te < 0 ? test : -test
+            console.log(test1);
+            // 判断是否停止
+            if (te > 0 ? obj.offsetLeft <= target : obj.offsetLeft >= target) {
+                clearInterval(obj.timers);
+                callback && callback();
+            }
+            obj.style.left = obj.offsetLeft + test1 + 'px'
+        }, 15)
+    }
+
+    btn1.addEventListener('click', function () {
+        animation(box, 100, 10)
+    })
+    btn2.addEventListener('click', function () {
+        animation(box, 200, 10)
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学员信息管理</title>
+    <script>
+        // 学员列表
+        let userList = [];
+        // 添加一个属性，用来保存Id
+        userList.autoId = 1;
+        // 1.显示提示信息，获取输入数字
+        do {
+            let operate = +prompt('请输入您要进行的操作：\n1.添加学员\n2.删除学员\n3.显示学员列表\n4.退出');
+            // 退出系统
+            if (operate == 4) {
+                alert('已成功退出系统！');
+                break;
+            };
+
+            switch (operate) {
+                case 1: {
+                    // 添加学员
+                    addUser();
+                    break;
+                }
+                case 2: {
+                    // 删除学员
+                    delUser();
+                    break;
+                }
+                case 3: {
+                    // 显示学员列表
+                    printUser();
+                    break;
+
+                }
+            };
+        } while (true);
+
+        // 添加学员函数
+        function addUser() {
+            let uName = prompt('请输入姓名：');
+            let uAge = check();
+            let uGender = prompt('请输入性别：');
+            // 创建学员对象
+            let stuObj = {
+                id: userList.autoId,
+                name: uName,
+                age: uAge,
+                gender: uGender
+            };
+            userList.autoId++;
+            userList.push(stuObj);
+            alert('学员' + uName + '添加成功！')
+        }
+        // 输入数字检测函数
+        function check() {
+            let uAge = prompt('请输入年龄：');
+            while (true) {
+                if (isNaN(uAge)) {
+                    alert('年龄请输入数字')
+                    uAge = prompt('请输入数字：');
+                } else if (uAge <= 0 || uAge > 100) {
+                    alert('请输入正确的数字范围1~100');
+                    uAge = prompt('请输入年龄：');
+
+                } else {
+                    break;
+                }
+            };
+            return uAge;
+        }
+
+        // 删除学员函数
+        function delUser() {
+            let uId = parseInt(prompt('请输入要删除学员的ID：'));
+            for (let i = 0; i < userList.length; i++) {
+                if (userList[i].id == uId) {
+                    userList.splice(i, 1);
+                    alert('删除成功！');
+                    printUser();
+                    break;
+                }
+            }
+
+        }
+
+        // 打印学员列表
+        function printUser() {
+            let stuList = '';
+
+            for (let i = 0; i < userList.length; i++) {
+                // console.log(userList[i]);
+                // 取出学员对象
+                let stuObj = userList[i];
+                let strInfo = stuObj.id + ':' + stuObj.name + '：' + stuObj.age + '：' + stuObj.gender + '\n'
+                stuList += strInfo;
+            }
+            alert(stuList)
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

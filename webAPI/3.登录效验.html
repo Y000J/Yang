@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid #000;
+            width: 300px;
+            margin: 50px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid #000;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td colspan="2">欢迎登录！</td>
+        </tr>
+        <tr>
+            <td>用户名</td>
+            <td><input type="text" id="userName"></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="password" id="password"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" value="登录">
+                <input type="button" value="注册">
+            </td>
+        </tr>
+    </table>
+    <script>
+        let userName = document.querySelector('#userName');
+        let password = document.querySelector('#password');
+        let btnLogin = document.querySelector('[value="登录"]');
+        let btnRegister = document.querySelector('[value="注册"]');
+        // 用户密码
+        let data = [
+            {
+                userName: 1,
+                password: '1'
+            },
+            {
+                userName: 2,
+                password: '123asd'
+            }
+        ]
+        btnLogin.addEventListener('click', function () {
+            let user = userName.value.trim();
+            let pdw = password.value;
+            // 判断用户名或密码是否为空
+            isNull(user, pdw);
+            result(user, pdw);
+        });
+        // 判断用户名是否为空
+        function isNull(user, pwd) {
+            //去除空格
+            if (user.length == 0) {
+                alert('用户名不能为空，请重新输入')
+            } else if (pwd.length == 0) {
+                alert('密码不能为空，请重新输入')
+            }
+            return true;
+        };
+        // 验证用户密码
+        function result(user, pwd) {
+            let flag = false;
+            // 遍历数据数组
+            for(let i=0;i<data.length;i++){
+                if (data[i].userName == user && data[i].password == pwd) {
+                    flag = true;
+                    break;
+                } else {
+                    flag = false;
+                }
+            };
+            if (flag) {
+                alert('登录成功！');
+            } else {
+                alert('用户名或密码错误');
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>捐赠管理</title>
+    <style type="text/css">
+        * {
+            font-family: 微软雅黑;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            width: 940px;
+            padding: 5px;
+            margin: 2px auto;
+            border: 1px solid #0094ff;
+        }
+
+        #tbData {
+            border: 1px solid #0094ff;
+            border-collapse: collapse;
+            width: 950px;
+            margin: 2px auto;
+        }
+
+        #tbData th {
+            color: #fff;
+            background-color: #0094ff;
+        }
+
+        #tbData th,
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+    <script src="./donationList.js"></script>
+
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            // 二、业务和dom 代码 -------------------------------------------
+            // 0.1 创建 机构列表 和 捐款记录列表 实例对象
+            let orgList = new OrgList()  // new 增强版的Array()
+            // orgList.addOrg('邹基金')
+
+            let donationList = new DonationList()
+
+            // 0.2 获取 dom元素对象
+            let tbodyDom = document.querySelector('#tbody')
+            let btnNextDom = document.querySelector('#btnNext')
+            let btnPreDom = document.querySelector('#btnPre')
+
+            // 查询下拉框
+            let selOrgDom = document.querySelector('#selOrg')
+            // 查询按钮
+            let btnSearchDom = document.querySelector('#btnSearch')
+            // 显示 页码，总页数，总行数
+            let spanPageCount = document.querySelector('#spanPageCount')
+
+            // 新增按钮
+            let txtName = document.querySelector('#txtName')
+            let selAddOrg = document.querySelector('#selAddOrg')
+            let txtMoney = document.querySelector('#txtMoney')
+            let txtDate = document.querySelector('#txtDate')
+            let btnAdd = document.querySelector('#btnAdd')
+
+            // 编辑状态的行dom对象(内存中)
+            let editRowDom = document.createElement('tr')
+            editRowDom.innerHTML = `<td>0</td>
+                                    <td><input type="text"/></td>
+                                    <td><select></select></td>
+                                    <td><input type="number"/></td>
+                                    <td><input type="date"/></td>
+                                    <td>
+                                        <a href="javascript:;">确定</a>
+                                        <a href="javascript:;">取消</a>
+                                    </td>`
+
+            // 2.加载 机构下拉框 --------------------------------
+            makeSelect()
+            function makeSelect() {
+                let arrOptStr = ['<option value="-1">请选择</option>']
+                // a.遍历 机构数组
+                for (let org of orgList) {
+                    arrOptStr.push(`<option value="${org.id}">${org.name}</option>`)
+                }
+                let optStr = arrOptStr.join('\r\n')
+                console.log('optStr->', optStr)
+                // b.设置 三个 下拉框
+                selOrgDom.innerHTML = optStr
+                selAddOrg.innerHTML = optStr
+                editRowDom.children[2].children[0].innerHTML = optStr
+            }
+
+            // 3.默认显示首页数据到列表 -------------------------
+            let pagedList = donationList.getPagedList(1)
+            makeTrs(pagedList)
+
+            // 根据 数据 生成表格行 ------------------------------
+            function makeTrs(data) {
+                // 如果 数据为空，则 显示 暂无数据
+                if (data.length === 0) {
+                    // 一次性将数组中的 行标签 设置给 tbody
+                    tbodyDom.innerHTML = '<tr><td colspan="6">暂无数据</td></tr>'
+                    // 显示总行数
+                    return showCount(true)
+                }
+                // 行标签字符串数组
+                let arrTrStr = []
+                // 循环生成表格行标签字符串，存入数组
+                for (let rowData of data) {
+                    let strTr = `<tr>
+                                <td>${rowData.id}</td>
+                                <td>${rowData.username}</td>
+                                <td>${orgList.findOrgById(rowData.orgId).name}</td>
+                                <td>${rowData.money}</td>
+                                <td>${rowData.date}</td>
+                                <td data-id="${rowData.id}">
+                                    <a href="javascript:;">删</a>
+                                    <a href="javascript:;">改</a>
+                                </td>
+                            </tr>`
+                    arrTrStr.push(strTr)
+                }
+                // 一次性将数组中的 行标签 设置给 tbody
+                tbodyDom.innerHTML = arrTrStr.join('\r\n')
+                // 显示总行数
+                showCount()
+            }
+
+            // 4.下一页按钮 点击-----------------------------------
+            btnNextDom.addEventListener('click', function () {
+                let pageList = donationList.getNextPage()
+                pageList && makeTrs(pageList)
+            })
+
+            // 5.上一页按钮 点击-----------------------------------
+            btnPreDom.addEventListener('click', function () {
+                let pageList = donationList.getPrevPage()
+                pageList && makeTrs(pageList)
+            })
+
+            // 6.显示 行数记录 isEmpty（当前页数据是否为空）
+            function showCount(isEmpty = false) {
+                const pi = isEmpty ? 0 : donationList.pageIndex
+                spanPageCount.innerHTML = `${pi}/${donationList.pageCount}页  共 ${donationList.searchResList.length} 行`
+            }
+
+            // 7.搜索按钮点击 -------------------------------------
+            btnSearchDom.addEventListener('click', function () {
+                // 将 下拉框 选中的 机构id 设置给 捐款列表的查询属性
+                let orgId = parseInt(selOrgDom.value)
+                // 搜索 机构 捐款，并获取首页数据
+                let data = donationList.doSearch(orgId)
+                makeTrs(data)
+                // 统计页数
+                showCount()
+            })
+
+            // 8.新增按钮点击 -------------------------------------
+            btnAdd.addEventListener('click', function () {
+                if (selAddOrg.value == -1) return alert('请选择机构哦~！')
+                // 添加到捐款数组
+                donationList.addDonation(txtName.value.trim(), parseInt(selAddOrg.value), parseInt(txtMoney.value.trim()), txtDate.value)
+                // 模拟搜索，重新 渲染表格
+                reRender()
+            })
+
+            // 9.重新绘制 表格
+            function reRender() {
+                // 重新 根据当前页码 获取 分页数据
+                let pagedList = donationList.getPagedList()
+                // 如果 当前页数据为空，且 当前 不是第一页
+                if (pagedList.length === 0 && donationList.pageIndex > 1) {
+                    // 当前页 -1
+                    donationList.pageIndex--
+                    reRender()
+                } else {
+                    // 根据分页数据 生成表格
+                    makeTrs(pagedList)
+                }
+            }
+
+            // 被编辑的 显示用数据行
+            let oldRowDom = null
+            // 9.在tbody上委托 【删除】 和 【编辑】 按钮点击事件 ---------------
+            tbodyDom.addEventListener('click', function (e) {
+                // 如果是删除操作
+                if (e.target.innerText == '删') {
+                    // 获取 按钮所在 单元格 dom对象
+                    let curTd = e.target.parentElement
+                    // 获取 当前行数据 id  （data-id="1"）
+                    let curId = curTd.dataset.id.toNumber()
+
+                    // b.根据 id 到原数组中删除
+                    donationList.deleteById(curId)
+                    // c.重新绘制 表格
+                    reRender()
+                } else if (e.target.innerText == '改') {
+
+                    // 获取 按钮所在 单元格 dom对象
+                    let curTd = e.target.parentElement
+                    // 获取 当前行数据 id
+                    let curId = curTd.dataset.id.toNumber()
+
+
+                    // 如果 已经有 处于编辑状态的 行，则 先 还原成 编辑状态前的行
+                    if (oldRowDom) {
+                        editRowDom.replaceWith(oldRowDom)
+                    }
+                    // 将 当前 按钮所在行 对象 替换成 编辑行
+                    // a.获取当前 行dom对象
+                    let curRow = oldRowDom = curTd.parentElement
+                    // b.获取当前行 数据对象
+                    let curRowData = donationList.findById(curId) //JSON.parse(curTd.dataset.rowdata)
+                    // c.用 编辑行 替换 掉当前行
+                    curRow.replaceWith(editRowDom)
+
+                    // b.修改 单元格内容
+                    // 设置 编辑行 中的 捐款人姓名
+                    editRowDom.children[0].innerHTML = curRowData.id
+                    // 设置 编辑行 中的 捐款人姓名
+                    editRowDom.children[1].children[0].value = curRowData.username
+                    // 修改 编辑行 中的 机构下拉框 的 选中项
+                    editRowDom.children[2].children[0].value = curRowData.orgId
+                    // 设置 编辑行 中的 捐款金额
+                    editRowDom.children[3].children[0].value = curRowData.money
+                    // 设置 编辑行 中的 日期
+                    editRowDom.children[4].children[0].value = curRowData.date
+                }
+            })
+
+            // 10.编辑行中 的 确定 按钮 点击事件 --------------
+            editRowDom.children[5].children[0].addEventListener('click', function () {
+                // a.获取 编辑行中 的数据
+                let newData = {
+                    id: editRowDom.children[0].innerHTML.toNumber(),
+                    username: editRowDom.children[1].children[0].value,
+                    orgId: editRowDom.children[2].children[0].value.toNumber(),
+                    money: editRowDom.children[3].children[0].value.toNumber(),
+                    date: editRowDom.children[4].children[0].value,
+                }
+
+                // b.更新到 数组中
+                let oldData = donationList.find(e => e.id === newData.id)
+                oldData.username = newData.username
+                oldData.orgId = newData.orgId
+                oldData.money = newData.money
+                oldData.date = newData.date
+
+                // c.更新到 旧行中
+
+                // 设置 编辑行 中的 捐款人姓名
+                // console.log(oldRowDom.children[1])
+                oldRowDom.children[1].innerHTML = newData.username
+                // 修改 编辑行 中的 机构下拉框 的 选中项
+                oldRowDom.children[2].innerHTML = orgList.findOrgById(newData.orgId).name
+                // 设置 编辑行 中的 捐款金额
+                oldRowDom.children[3].innerHTML = newData.money
+                // 设置 编辑行 中的 日期
+                oldRowDom.children[4].innerHTML = newData.date
+
+                // // c.更新成功，重新将 显示行 替换 编辑行
+                editRowDom.replaceWith(oldRowDom)
+
+            })
+            // 11.编辑行中 的 取消 按钮 点击事件 --------------
+            editRowDom.children[5].children[1].addEventListener('click', function () {
+                // 重新将 显示行 替换 编辑行
+                editRowDom.replaceWith(oldRowDom)
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <h1>捐赠管理</h1>
+    <div>
+        受捐企业：
+        <select id="selOrg">
+            <option value="-1">请选择</option>
+        </select>
+        <input type="button" id="btnSearch" value="查询" />
+        <input type="button" id="btnPre" value="上一页" />
+        <input type="button" id="btnNext" value="下一页" />
+        <span id="spanPageCount"></span>
+    </div>
+    <div>
+        捐赠人：<input type="text" id="txtName" />
+        受捐企业：<select id="selAddOrg"></select>
+        金额：<input type="number" id="txtMoney" />
+        受捐日期：<input type="date" id="txtDate" />
+        <input type="button" id="btnAdd" value="新增" />
+    </div>
+    <table id="tbData">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>捐赠人</th>
+                <th>受捐企业</th>
+                <th>金额</th>
+                <th>受捐日期</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+
+</html>

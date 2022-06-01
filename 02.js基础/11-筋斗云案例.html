@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 100px auto;
+        }
+
+        .nav {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            background-color: pink;
+        }
+
+        .nav ul {
+            width: 100%;
+            position: relative;
+        }
+
+        .nav ul li {
+            list-style: none;
+            float: left;
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav .cloud {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 200px;
+            height: 40px;
+            background: url(./cloud.gif) no-repeat 57px 0;
+            opacity: .5;
+
+        }
+    </style>
+    <script src="animate.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <span class="cloud"></span>
+            <ul>
+                <li class="cuerent"><a href="#">菜单选项</a></li>
+                <li><a href="#">菜单选项</a></li>
+                <li><a href="#">菜单选项</a></li>
+                <li><a href="#">菜单选项</a></li>
+                <li><a href="#">菜单选项</a></li>
+                <li><a href="#">菜单选项</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var nav = document.querySelector('.nav');
+        var lis = document.querySelectorAll('li');
+        var cloud = nav.querySelector('.cloud');
+        //声明一个变量控制返回位置
+        var current = 0;
+        //给每个li绑定鼠标移入事件
+        
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].addEventListener('mouseenter', function () {
+                animate(cloud, this.offsetLeft);
+            })
+            lis[i].addEventListener('mouseleave', function () {
+                animate(cloud, current);
+            })
+            lis[i].addEventListener('click', function () {
+                // 将鼠标点击的新位置传给current
+                current = this.offsetLeft;
+            })
+        }
+
+    </script>
+</body>
+
+</html>

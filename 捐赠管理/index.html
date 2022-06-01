@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捐赠管理</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>捐赠管理</h1>
+        <div class="head">
+            受捐企业：
+            <select id="selSearchOrg" class="selO">
+                <option value="-1">全部</option>
+            </select>
+            <input type="button" id="btnSearch" value="查询" />
+            <input type="button" id="btnPre" value="上一页" />
+            <input type="button" id="btnNext" value="下一页" />
+            <span id="spanPage">1</span>/
+            <span id="spanPageCount"></span>
+        </div>
+        <div class="screen">
+            捐赠人：<input type="text" class="wi" id="txtName" />
+            受捐企业：<select id="selAddOrg" class="selO">
+            </select>
+            金额：<input type="text" class="wi" id="txtMoney" />
+            受捐日期：<input type="text" class="wi" id="txtDate" />
+            <input type="button" id="btnAdd" value="新增" />
+            <input type="button" id="btndel" value="删除" />
+        </div>
+        <table id="tbData">
+            <thead>
+                <tr>
+                    <th class="qs">
+                        <input type="checkbox">
+                        全选
+                    </th>
+                    <th class="qs">序号</th>
+                    <th class="qs">捐赠人</th>
+                    <th class="qd">受捐企业</th>
+                    <th class="qf">金额</th>
+                    <th class="qf">受捐日期</th>
+                    <th class="qf">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

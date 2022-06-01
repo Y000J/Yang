@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示用户输入的属性</title>
+    <script>
+        // 准备一个对象
+        let hero = {
+            name: '张三',
+            age: 18,
+            hobby: '登山',
+            oper: function () {
+                console.log('姓名：' + this.name + '年龄：' + this.age + '爱好：' + this.hobby);
+            }
+        }
+        // hero.oper1();
+        // let proName = prompt('请输入要显示的内容');
+        // hero.oper();
+        // hero['oper']();
+        // if (proName in hero) {
+        //     let proValue = hero[proName];
+        //     console.log(proValue);
+        // }
+
+        for(let key in hero ){
+            
+            console.log(key+'-------'+hero[key]);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

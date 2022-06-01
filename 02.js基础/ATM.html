@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*  n1、存钱\
+            n2、取钱\
+            n3、查询余额\
+            n4、退出 
+        */
+        // 声明变量保存余额
+        let balance = 0;
+        let userName = prompt('请输入您的姓名：');
+        alert(userName + '欢迎登录！')
+
+        do {
+            let operator = parseInt(prompt('请输入要进行的操作：\n1、存钱\n2、取钱\n3、查询余额\n4、退出\n请输入您的选项：'));
+            if (operator == 4) {
+                alert('已退出当前账号！')
+                break;
+            }
+            switch (operator) {
+                case 1: {
+                    // 存
+                    let tempMoney = parseInt(prompt('请输入存储的金额：'));
+                    balance += tempMoney;
+                    alert(tempMoney + '元，已存入成功！当前余额为：' + balance);
+                    break;
+                }
+                case 2: {
+                    let tempMoney = parseInt(prompt('请输入取出的金额：'));
+                    // 判断余额是否足够
+                    if (tempMoney > balance) {
+                        alert('余额不足！');
+                        break;
+                    }
+                    balance -= tempMoney;
+                    alert(tempMoney + '元，已取出成功！当前余额为：' + balance);
+                    break;
+                }
+                case 3: {
+                    alert('您当前余额为：' + balance);
+                    break;
+                }
+
+            }
+        } while (true)
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

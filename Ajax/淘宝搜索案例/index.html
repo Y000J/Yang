@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <!-- 导入页面的基本样式 -->
+  <link rel="stylesheet" href="./css/search.css" />
+  <!-- 导入 jQuery -->
+  <script src="./lib/jquery-3.6.0.min.js"></script>
+  <script src="./lib/template-web.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <img src="./images/taobao_logo.png" alt="" class="logo" />
+
+    <div class="box">
+      <!-- tab 栏 -->
+      <div class="tabs">
+        <div class="tab-active">宝贝</div>
+        <div>店铺</div>
+      </div>
+      <!-- 搜索区域（搜索框和搜索按钮） -->
+      <div class="search-box">
+        <input type="text" class="ipt" placeholder="请输入要搜索的内容" />
+        <button class="btnSearch">
+          搜索
+        </button>
+      </div>
+      <div id="suggest-List"></div>
+    </div>
+  </div>
+
+  <script type="text/html" id="tpl-suggestList">
+    {{each result}}
+    <div class="suggest-item">{{$value[0]}}</div>
+    {{/each}}
+  </script>
+
+  <script>
+    // 监听文本框的keyup事件
+    $('.ipt').on('keyup', function () {
+      // 获取用户输入的内容
+      let keywords = $(this).val().trim();
+      if (keywords.length <= 0) {
+        return $('#suggest-List').empty().hide();
+      }
+      // getSuggestList(keywords);
+      clearTimeout(timer)
+      debounceSearch(keywords)
+    });
+    $('.btnSearch').on('click', function () {
+
+    })
+    // 获取搜索建议的列表
+    function getSuggestList(kw) {
+      $.ajax({
+        url: 'https://suggest.taobao.com/sug?q=' + kw,
+        dataType: 'jsonp',
+        success: function (res) {
+          console.log(res)
+          renderSuggestList(res)
+        }
+      })
+    };
+
+    // 渲染模板结构
+    function renderSuggestList(res) {
+      if (res.result.length <= 0) {
+        return $('#suggest-List').empty().hide();
+      }
+      let htmlStr = template('tpl-suggestList', res);
+      $('#suggest-List').html(htmlStr).show();
+    }
+
+    // 输入框防抖
+    let timer = null;
+    // 防抖函数
+    function debounceSearch(kw) {
+      timer = setTimeout(function () {
+        getSuggestList(kw);
+      },500)
+    }
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 120px;
+            margin: 100px auto;
+        }
+
+        button:first-child {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="checkbox" class="checkInput" checked="checked">
+        <input type="checkbox" class="checkInput">
+        <input type="checkbox" class="checkInput">
+        <input type="checkbox" class="checkInput">
+        <br>
+        <input type="checkbox" class="checkAll">全选
+        <input type="checkbox" class="contrary">反选
+    </div>
+    <script>
+        let checkInput = document.querySelectorAll('.checkInput');
+        let checkAll = document.querySelector('.checkAll');
+        let contrary = document.querySelector('.contrary');
+
+        // 全选按钮  使用change事件
+        checkAll.addEventListener('change', function () {
+            // 如全选按钮  选中  则其他也选中
+            if (checkAll.checked) {
+                for (let i = 0; i <= checkInput.length; i++) {
+                    checkInput[i].checked = 'true';
+                }
+            } else {
+                for (let i = 0; i <= checkInput.length; i++) {
+                    checkInput[i].checked = '';
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

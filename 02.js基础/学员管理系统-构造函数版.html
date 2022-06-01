@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学员管理系统</title>
+</head>
+
+<body>
+    <!-- <script>
+        // 判断用户输入的是否为数字
+        function getNum(msg) {
+            let a = parseInt(prompt(msg));
+            while (isNaN(a)) {
+                alert('您输入的不是数字，请重新输入：')
+                a = parseInt(prompt(msg));
+            }
+            return a;
+        }
+        // 判断用户输入的名字是否为空
+        function getName(msg) {
+            // 去除空格
+            let a = prompt(msg).trim();
+            while (a.length === 0) {
+                alert('名字不能为空，请重新输入：')
+                a = prompt(msg).trim();
+            }
+            return a;
+        }
+
+        // 学员列表数据
+        let stuList = [
+           new StuInfo(1,'下颌',18,'true')
+        ];
+
+        // 学员构造函数
+        function StuInfo(id, name, age, gender) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+
+        }
+        // 返回学员列表  共用方法
+        StuInfo.prototype.getInfo = function () {
+            return `ID:${this.id} 姓名：${this.name} 年龄：${this.age} 性别:${this.gender} \n`;
+        }
+        // 程序主体
+        // 业务入口函数----------------------------
+        function main() {
+            // 循环开关
+            let flag = true;
+            // 循环操作
+            while (flag) {
+                let operate = getNum('请输入您要进行的操作：\n1.添加学员\n2.删除学员\n3.显示学员列表\n4.退出');
+                switch (operate) {
+                    case 1: {
+                        // 1.添加学员
+                        stuAdd();
+                        break;
+                    }
+                    case 2: {
+                        // 2.删除学员
+                        delStu();
+                        break;
+                    }
+                    case 3: {
+                        // 3.显示学员列表
+                        showStu();
+                        break;
+                    }
+                    default: {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+        }
+        main();
+
+        // 1.添加学员------------------------------
+        function stuAdd() {
+            // 创建学员对象
+            let stu = new StuInfo();
+            // 接收用户输入的信息
+            stu.id = stuList.length == 0 ? 1 : stuList[stuList.length - 1].id + 1;
+            stu.name = getName('请输入姓名：');
+            stu.age = getNum('请输入年龄：');
+            stu.gender = confirm('请选择您的性别：（确认-男  取消-女）');
+            stuList.push(stu);
+        }
+
+        // 2.删除学员------------------------------
+        function delStu() {
+            // 显示学员信息列表
+            showStu();
+            // 接收要删除的学员ID或姓名
+            let delId=getName('请输入学员ID：')
+            // 根据ID到数组中查找对应学员的下标
+            // 根据下标删除元素
+            stuList.forEach(function(stu,index){
+                if(delId==stu.id){
+                    stuList.splice(index,1);
+                }
+            })
+            
+        }
+
+
+        // 3.显示学员列表---------------------------
+        function showStu() {
+            let str = '';
+            stuList.forEach(function (stu, index) {
+                str += stu.getInfo();
+            })
+            alert(str);
+        }
+    </script> -->
+
+    <script>
+        // 学员姓名检测
+        function getName(msg) {
+            // 去除空格
+            let name = prompt(msg).trim();
+            while (name.length == 0) {
+                alert('名字不能为空，请重新输入：');
+                name = prompt(msg).trim();
+            }
+            return name;
+        }
+        // 检测输入是否为数字
+        function getNum(msg) {
+            let num = parseInt(prompt(msg));
+            while (isNaN(num)) {
+                alert('请重新输入数字ID：');
+                num = parseInt(prompt(msg));
+            }
+            return num;
+        }
+        // 学员列表
+        let stuList = [];
+        // 构造函数创建学员信息
+        function StuInfo(id, name, age, gender) {
+            this.id = id,
+                this.name = name,
+                this.age = age,
+                this.gender=gender
+        }
+        StuInfo.prototype.getInfo = function () {
+            return `ID:${this.id} 姓名：${this.name} 年龄：${this.age}  &nbsp性别:${this.gender==true?'男':'女'} \n`;
+        }
+
+        // 主体函数
+        function main() {
+            // 循环开关
+            let flag = true;
+            // 循环操作
+            while (flag) {
+                let operate = getNum('请输入您要进行的操作：\n1.添加学员\n2.删除学员\n3.显示学员列表\n4.退出');
+                switch (operate) {
+                    case 1: {
+                        // 1.添加学员
+                        stuAdd();
+                        break;
+                    }
+                    case 2: {
+                        // 2.删除学员
+                        delStu();
+                        break;
+                    }
+                    case 3: {
+                        // 3.显示学员列表
+                        showStu();
+                        break;
+                    }
+                    default: {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+        }
+        main();
+        // 1.添加学员------------------------------
+        function stuAdd() {
+            // 创建学员对象
+            let stu = new StuInfo();
+            stu.id = stuList.length == 0 ? 1 : stuList[stuList.length - 1].id + 1;
+            stu.name = getName('请输入姓名：');
+            stu.age = getNum('请输入年龄：');
+            stu.gender = confirm('请选择您的性别：（确认-男  取消-女）');
+            stuList.push(stu);
+            showStu();
+        }
+        // 删除学员------------------------------
+
+        function delStu() {
+            // 显示学员列表
+            showStu();
+            // 输入要删除学员的ID
+            let delId = getNum('请输入学员ID');
+            // 根据ID找到学员对应的下标
+            stuList.forEach(function (stu, index) {
+                if (stu.id === delId) {
+                    stuList.splice(index, 1);
+                }
+            });
+            showStu();
+        }
+
+        // 3.显示学员列表---------------------------
+
+        function showStu() {
+            //创建一个空字符串
+            let str = '';
+            stuList.forEach(stu => {
+                str += stu.getInfo();
+            });
+            alert(str);
+        }
+    </script>
+</body>
+
+</html>

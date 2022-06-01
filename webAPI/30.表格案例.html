@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 800px;
+            margin: 100px auto;
+            border: 1px solid #000;
+        }
+
+        table {
+            width: 800px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            height: 30px;
+        }
+
+        th {
+            background-color: skyblue;
+        }
+
+        #dataT tbody tr:hover {
+            background-color: bisque;
+        }
+
+        #addBtn {
+            width: 100px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        #addTr input {
+            width: 210px;
+            height: 22px;
+            font-size: 16px;
+        }
+
+        #addTr select {
+            width: 50px;
+            height: 22px;
+        }
+
+        .add {
+            display: none;
+            text-align: right;
+        }
+        .add button{
+            width: 50px;
+            height:25px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <button id="addBtn">新增一行</button>
+            <table id="dataT">
+                <thead>
+                    <tr>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="add">
+            <table id="addTr">
+                <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" id="addId"></td>
+                        <td><input type="text" id="addName"></td>
+                        <td><select id="addGender">
+                                <option value="true">男</option>
+                                <option value="false">女</option>
+                            </select></td>
+                        <td><input type="text" id="addAge"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <button id="sure">确定</button>
+            <button id="cancel">取消</button>
+        </div>
+    </div>
+    <script src="./30.js"></script>
+
+</body>
+
+</html>

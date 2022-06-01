@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <button id="btnUpload">确定上传</button>
+    <hr>
+    文件选择框：
+    <input type="file" name="uploadImg" id="uploadImg">
+    <hr>
+    <h1>上传结果：</h1>
+    <div id="divContent"></div>
+    <hr>
+    图片预览：
+    <img src="" id="imgPre" alt="">
+
+
+    <!-- 1.引入 axios文件 -->
+    <script src="lib/axios.js"></script>
+
+    <script>
+        // 设置文件选择框的change事件：选择不同文件之后触发
+        document.querySelector('#uploadImg').onchange = function (e) {
+            // 判断是否选择文件
+            if (e.target.files.length == 0) {
+                return alert('请选择要上传的文件');
+            };
+            // 将选中文件 转成一个虚拟路径，设置给图片标签  实现预览功能
+            const imgUrl = URL.createObjectURL(e.target.files[0]);
+            document.querySelector('#imgPre').src = imgUrl;
+        }
+
+        // 发送post请求【json格式】，进行
+        document.querySelector('#btnUpload').onclick = function () {
+            // 创建ForData对象
+            const fd = new FormData();
+            // ForData中添加 要上床的文件数据
+            fd.append('photo', document.querySelector('#uploadImg').files[0]);
+            // 发送post请求
+            axios({
+                url: 'http://toutiao.itheima.net/v1_0/user/photo',
+                method: 'PATCH',
+                data: fd,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer a64c7e42-02d1-41c9-a4f7-e1e3d68c6376'
+                }
+            }).then((res) => {
+                console.log('上传成功');
+                console.log(res);
+            }).catch((err) => {
+                console.log('上传失败');
+                console.log(err);
+            })
+        }
+
+    </script>
+</body>
+
+
+</html>

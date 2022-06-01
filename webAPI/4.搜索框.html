@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 300px;
+            height: 50px;
+            display: block;
+            margin: 50px auto;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text"  id="jd" placeholder="请输入内容">
+    <script>
+        let jd = document.querySelector('#jd');
+        jd.addEventListener('focus', function () {
+            if (jd.value == ""){
+                jd.placeholder = '';
+            }
+               
+        });
+        jd.addEventListener('blur', function () {
+            jd.placeholder = '请输入内容';
+        })
+    </script>
+</body>
+
+</html>

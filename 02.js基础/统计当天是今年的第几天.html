@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 输入一天的日期，判断是今年的第几天
+        // 1.遍历每个月的总天数
+        // 2.累加每个月的天数
+        // 3.判断平年还是闰年
+
+
+        // 月份天数数组
+        function sumDays(year, month, day) {
+            let arrMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            // 判断是否为闰年，更改2月的天数
+            if (isRunYear(year)) {
+                arrMonth[1] = 29;
+            }
+            console.log(year);
+            console.log(month);
+            console.log(day);
+            let sumDay = 0;
+            // 循环累加
+            if (month >= 2) {
+                for (let i = 0; i <= month - 2; i++) {
+                    sumDay += arrMonth[i];
+                }
+                sumDay += day;
+            } else {
+                sumDay = day;
+
+            }
+           
+            console.log('这是第：' + sumDay + '天');
+
+        }
+        // 判断是否为闰年
+        function isRunYear(year) {
+            if (year % 400 == 0 || year % 4 == 0 && year % 100 != 0) {
+                return true;
+            }
+            return false;
+        }
+        let year = parseInt(prompt('年：'));
+        let month = parseInt(prompt('月：'));
+        let day = parseInt(prompt('日：'));
+        sumDays(year, month, day);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

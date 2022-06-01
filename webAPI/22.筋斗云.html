@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筋斗云</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(122, 122, 122);
+        }
+
+        .box {
+            position: relative;
+            width: 600px;
+            margin: 100px auto;
+        }
+
+        #nav {
+            line-height: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            display: flex;
+            width: 600px;
+            height: 50px;
+        }
+
+        #nav li {
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            list-style: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        #nav li:hover {
+            color: blueviolet;
+        }
+
+        #cloud {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100px;
+            height: 50px;
+            background: url(./images/cloud.gif) no-repeat 10px;
+            opacity: .5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <span id="cloud"></span>
+        <ul id="nav">
+            <li>选项一</li>|
+            <li>选项二</li>|
+            <li>选项三</li>|
+            <li>选项四</li>|
+            <li>选项五</li>|
+            <li>选项六</li>
+        </ul>
+    </div>
+    <script src="./GlobalTools.js"></script>
+    <!-- <script src="./缓动动画.js"></script> -->
+    <script>
+        let lis = document.querySelectorAll('#nav>li');
+        let cloud = document.querySelector('#cloud');
+        // 控制返回的位置
+        let init = 0;
+        lis.forEach((ele, index) => {
+
+            ele.addEventListener('mouseenter', function () {
+                // animate(cloud, 100 * index)
+                let trage = 100 * index;
+                animate(cloud, {
+                    left: 100 * index
+                })
+            });
+
+            ele.addEventListener('mouseleave', function () {
+                animate(cloud, {
+                    // left: 100*init
+                    left:init
+                })
+            });
+            ele.addEventListener('click', function () {
+                init = this.offsetLeft
+            })
+        });
+    </script>
+</body>
+
+</html>

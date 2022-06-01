@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跟随鼠标移动</title>
+    <style>
+        img {
+            width: 26px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./images/green.png" alt="">
+
+    <script>
+        let img = document.querySelector('img');
+        document.addEventListener('mousemove', function (e) {
+            console.log(e.clientY);
+            console.log(e.clientX);
+            img.style.top = e.pageY - img.offsetHeight / 2 + 'px';
+            img.style.left = e.pageX- img.offsetWidth / 2 + 'px';
+        })
+    </script>
+</body>
+
+</html>

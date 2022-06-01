@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            margin: 100px auto;
+            width: 500px;
+            border: 1px solid black;
+            padding: 10px;
+            height: 340px;
+        }
+
+        .content {
+            display: none;
+            width: 100%;
+            height: 300px;
+            border: 1px solid black;
+        }
+
+        .bgc {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+        <div class="content">内容1</div>
+        <div class="content">内容2</div>
+        <div class="content">内容3</div>
+        <div class="content">内容4</div>
+    </div>
+
+    <script>
+        let btn = document.querySelectorAll('button');
+        let content = document.querySelectorAll('.content');
+        for (let i = 0; i < btn.length; i++) {
+            // 添加自定义属性
+            btn[i].setAttribute('index', i);
+            btn[i].addEventListener('click', function () {
+                // for (let j = 0; j < btn.length; j++) {
+                //     btn[j].className = '';
+                //     console.log(1);
+                // }
+                // this.className = 'bgc';
+                let bt=this.getAttribute("index");
+                for (let j = 0; j < btn.length; j++) {
+                    if (j == bt) {
+                        this.className = 'bgc';
+                        content[bt].style.display = 'block'
+                    } else {
+                        btn[j].className = '';
+                        content[j].style.display = ''
+                    }
+                }
+          
+            });
+
+        }
+    </script>
+</body>
+
+</html>

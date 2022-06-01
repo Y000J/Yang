@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            height: 150px;
+            margin: 100px auto;
+            border-collapse: collapse;
+        }
+
+        tr:first-child {
+            background-color: skyblue;
+        }
+
+        th {
+            border: 1px solid #000;
+        }
+
+        td {
+            text-align: center;
+
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th><input type="checkbox" class="checkAll">全选</th>
+            <th>菜名</th>
+            <th>商家</th>
+            <th>价格</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="caiName" checked></td>
+            <td>烤鸭</td>
+            <td>隆江猪脚</td>
+            <td>￥800</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="caiName"></td>
+            <td>红烧排骨</td>
+            <td>隆江猪脚</td>
+            <td>￥200</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="caiName"></td>
+            <td>西红柿</td>
+            <td>隆江猪脚</td>
+            <td>￥5</td>
+        </tr>
+    </table>
+
+    <script>
+        let checkAll = document.querySelector('.checkAll');
+        let caiName = document.querySelectorAll('[name="caiName"]');
+        // 全选按钮
+        checkAll.addEventListener('change', function () {
+            for (let i = 0; i < caiName.length; i++) {
+                if(checkAll.checked){
+                    caiName[i].checked = true;
+                }else{
+                    caiName[i].checked = false;
+                }
+            }
+        });
+        for (let i = 0; i < caiName.length; i++) {
+            caiName[i].addEventListener('click', function () {
+                let checkNum = true;
+
+                for (let j = 0; j < caiName.length; j++) {
+                    if (caiName[j].checked == false) {
+                        checkNum = false;
+                        break;
+                    }
+                }
+                checkAll.checked = checkNum;
+
+            });
+        }
+
+    </script>
+</body>
+
+</html>

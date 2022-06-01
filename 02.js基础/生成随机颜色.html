@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成随机颜色</title>
+
+    <style>
+    </style>
+</head>
+
+<body>
+    <script>
+        // 声明一个函数makeColor
+        // 16进制  [0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f];
+        // 使用for循环  循环6次  随机生成6个数字
+        // 6个数字利用下标取出
+        // 将6个数字放到一个变量中
+        function makeColor() {
+            let arrColor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+            let strCloor = '#';
+            for (let i = 0; i < 6; i++) {
+                // 生成1-15的随机数 Math.floor(Math.random() * 15 + 1)  作为下标
+                let index = Math.floor(Math.random() * 15 + 1)
+                strCloor += arrColor[index];
+            }
+            return strCloor;
+        };
+        let a = makeColor();
+        console.log(a);
+        document.body.style.backgroundColor = a;
+    </script>
+</body>
+
+</html>

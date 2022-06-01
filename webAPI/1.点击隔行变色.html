@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 200px;
+            list-style: none;
+            margin: 50px auto;
+        }
+
+        ul li {
+            border: 1px #000 solid;
+            text-align: center;
+
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <button>点击变色</button>
+
+    <script>
+        let li = document.querySelectorAll('li');
+        let btn = document.querySelector('button');
+        let flag = true;
+
+        btn.addEventListener('click', function () {
+            if (flag) {
+                li.forEach(function (ele, index) {
+                    if (index % 2 == 0) {
+                        li[index].style.backgroundColor = 'blue';
+                        console.log(index);
+                    } else {
+                        li[index].style.backgroundColor = 'skyblue';
+                    }
+                });
+                flag=false;
+            } else {
+                li.forEach(function (ele, index) {
+                    li[index].style.backgroundColor = '';
+                });
+                flag = true;
+            }
+
+        })
+    </script>
+</body>
+
+</html>

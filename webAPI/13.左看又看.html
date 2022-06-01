@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 800px;
+            margin: 100px auto;
+        }
+
+        img {
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+        <img src="images/normal.jpg" alt="">
+    </div>
+
+    <script>
+        let imgs = document.querySelectorAll('img');
+        // 绑定事件
+        for (let i = 0; i < imgs.length; i++) {
+            imgs[i].setAttribute('index', i);
+            imgs[i].addEventListener('mouseenter', function () {
+                this.src = 'images/pressed.jpg';
+                let leftSib = this.previousElementSibling;
+                let rigthSib = this.nextElementSibling;
+                while (leftSib != null) {
+                    leftSib.src = 'images/right.jpg';
+                    leftSib = leftSib.previousElementSibling;
+                }
+                while (rigthSib != null) {
+                    rigthSib.src = 'images/left.jpg';
+                    rigthSib = rigthSib.nextElementSibling;
+                }
+                
+            });
+            imgs[i].addEventListener('mouseleave', function () {
+                this.src = 'images/normal.jpg';
+                let leftSib = this.previousElementSibling;
+                let rigthSib = this.nextElementSibling;
+                while (leftSib != null) {
+                    leftSib.src = 'images/normal.jpg';
+                    leftSib = leftSib.previousElementSibling;
+                }
+                while (rigthSib != null) {
+                    rigthSib.src = 'images/normal.jpg';
+                    rigthSib = rigthSib.nextElementSibling;
+                }
+                
+            });
+        }
+
+
+       
+    </script>
+</body>
+
+</html>

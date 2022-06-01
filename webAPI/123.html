@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            border: 1px solid #000;
+            width: 300px;
+            height: 30px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <script>
+        //     let str = "测试一个字符串111是否包含另外一个字符串";
+        // if (str.indexOf("") >= 0) {
+        //      alert('字符串中包含111字符串');
+        //   } else {
+        //      alert('字符串中 不包含111字符串');
+        // }
+
+
+
+        // 数组去重
+
+        // Set()将数组元素转换成Set对象  去除重复的元素
+        // Array.from()将类数组转换为数组
+        let arr = [1, 2, 2, 4, 5, 4]
+
+        function dedupe(arr) {
+            return Array.from(new Set(arr))
+        }
+
+        let a = dedupe(arr);
+        console.log(a);//[1, 2, 4, 5]
+    </script>
+</body>
+
+</html>

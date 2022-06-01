@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="" alt="">
+    <script>
+
+        // 将电脑硬盘上的图片拖拽到浏览器
+        let body = document.body;
+        let img = document.querySelector('img');
+        body.addEventListener('dragover', function (e) {
+            e.preventDefault();
+        });
+        body.addEventListener('drop', function (e) {
+            e.preventDefault();
+            // 将文件的虚拟路径  使用URL.createObjectURL（）方法，将文件信息对象转换 成虚拟文件路径  设置给img的src
+            console.log(e.dataTransfer.files[0]);
+            let imgUrl = URL.createObjectURL(e.dataTransfer.files[0]);
+            img.src = imgUrl;
+        })
+    </script>
+</body>
+
+</html>

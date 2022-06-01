@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驼峰命名法</title>
+</head>
+
+<body>
+
+    <script>
+        // 改为小驼峰命名  首单词除外
+        let str1 = 'get&element&by&class&name';
+        // 结果
+        let str2 = '';
+        // 拆分数组
+        let arr1 = str1.split('&');
+        // 将第一元素给  str2结果
+        str2 = arr1[0];
+        // 遍历数组，从下标1 开始
+        arr1.forEach(function (ele, index) {
+            if (index > 0) {
+                // 将首字母转为大写
+                let firstChart = ele[0].toUpperCase();
+                // 拼接单词
+                let newStr = ele.substring(1, ele.length);
+                str2 += firstChart + newStr;
+            }
+        })
+        console.log(str2);
+
+    </script>
+</body>
+
+</html>

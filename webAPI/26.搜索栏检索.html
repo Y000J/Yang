@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索栏检索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 800px;
+            margin: 100px auto;
+            /* background-color: pink; */
+            font-size: 0;
+            position: relative;
+        }
+
+        #search {
+            width: 520px;
+            height: 40px;
+            vertical-align: middle;
+            vertical-align: middle;
+            box-sizing: border-box;
+            font-size: 22px;
+        }
+
+        #btn {
+            width: 100px;
+            height: 40px;
+            vertical-align: middle;
+            border: solid 1px rgb(133, 133, 133);
+            border-left: 0;
+        }
+
+        #recommend {
+            /* display: none; */
+            position: absolute;
+            top: 40px;
+            left: 0px;
+
+        }
+
+        #recommend li {
+            list-style: none;
+            width: 520px;
+            height: 20px;
+            /* color: #fff; */
+            font-size: 18px;
+            line-height: 18px;
+            background-color: rgb(197, 197, 197);
+        }
+
+        #recommend li:hover {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top">
+            <input type="text" id="search">
+            <button id="btn">搜索</button>
+        </div>
+        <ul id="recommend">
+
+        </ul>
+    </div>
+
+    <script>
+        let dataArr = ['1', '热点', '1234', '疫情', '疫情新闻', '每日焦点', '年度苦情剧', '核酸检测', '新型核酸检测试剂', '342112']
+        let search = document.querySelector('#search');
+        let recommend = document.querySelector('#recommend');
+        // 输入关键字后检索dataArr  根据内容创建li
+        search.addEventListener('keyup', function (e) {
+            // 清除之前创建的li
+            recommend.innerHTML = '';
+            if (search.value.length === 0) return
+            // 根据输入的内容search.value遍历data
+            for (let i = 0; i < dataArr.length; i++) {
+                // 判断数组中元素是否包含
+                if (dataArr[i].indexOf(search.value) > -1) {
+                    // 创建li
+                    let li = document.createElement('li');
+                    // 将文字放入li
+                    li.innerHTML = dataArr[i];
+                    // 添加li
+                    recommend.appendChild(li);
+                    // 鼠标点击
+                    li.addEventListener('click', clickLi);
+
+                }
+
+            }
+        });
+
+
+        // 点击
+        function clickLi() {
+            // 更改搜索框的文字
+            search.value = this.innerHTML;
+            recommend.innerHTML = '';
+        }
+
+    </script>
+</body>
+
+</html>

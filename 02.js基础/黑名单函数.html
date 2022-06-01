@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bigSword(uName, jsID, yName) {
+            if (jsID <= 0) {
+                alert('技师ID错误');
+                return;//退出函数
+            }
+            let isInBlack = checkList(uName);
+            console.log(isInBlack);
+            if (isInBlack) {
+                alert('对不起，您在黑名单中');
+                return;
+            }
+
+
+            console.log(uName + '先生， 选择按摩师' + jsID + '号');
+            console.log(uName + '先生，付款成功，请喝杯' + yName + '补充能量');
+
+        }
+
+        function checkList(uName) {
+            // 创建一个黑名单
+            let blackList = ['许好', '杨洋', '看看'];
+            // let flag = false;
+            // for (let i = 0; i <= blackList.length; i++) {
+            //     if (blackList[i] == uName) {
+            //         console.log(blackList[i]);
+            //         flag = true;
+            //         break;
+            //     }
+
+            // }
+            return blackList.includes(uName);
+            // return flag;
+        }
+        let uName = prompt("请输入你的姓名：");
+        let jsID = prompt("请输入技师的ID：");
+        let yName = prompt("请输入要喝的饮料：");
+
+
+        bigSword(uName, jsID, yName);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
